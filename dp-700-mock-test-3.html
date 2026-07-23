@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microsoft Certified: Fabric Data Engineer Associate (DP-700) — K21 Academy Mock Test 3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ===== RESET & TOKENS ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green:      #8DC63F;
+  --green-mid:  #79B030;
+  --green-bg:   #F1F8E8;
+  --green-dark: #4A7A1B;
+  --navy:       #1A1248;
+  --navy-mid:   #2E2080;
+  --navy-light: #F0EEF8;
+  --bg:         #F0F2F5;
+  --surface:    #FFFFFF;
+  --border:     #DDE1E8;
+  --text-1:     #111827;
+  --text-2:     #4B5563;
+  --text-3:     #9CA3AF;
+  --orange:     #FF9900;
+  --orange-dk:  #E07B00;
+  --red:        #DC2626;
+  --red-bg:     #FEF2F2;
+  --amber:      #D97706;
+  --amber-bg:   #FFFBEB;
+  --correct:    #16A34A;
+  --correct-bg: #F0FDF4;
+  --wrong:      #DC2626;
+  --wrong-bg:   #FEF2F2;
+  --radius:     10px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+}
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-1); -webkit-font-smoothing: antialiased; }
+button { font-family: 'DM Sans', sans-serif; }
+
+/* ===== TOP HEADER BAR ===== */
+.exam-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 58px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.exam-header-logo { display: flex; align-items: center; gap: 12px; }
+.exam-header-logo .logo-badge {
+  background: var(--green); color: #fff; font-weight: 800;
+  font-size: 12px; padding: 4px 9px; border-radius: 6px; letter-spacing: .04em;
+}
+.exam-header-logo .exam-title { color: #fff; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+.exam-header-logo .exam-title span { color: var(--green); }
+.exam-header-meta { display: flex; align-items: center; gap: 20px; }
+.meta-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px; padding: 5px 12px; color: #fff; font-size: 13px; font-weight: 500;
+}
+.meta-pill .label { color: rgba(255,255,255,.55); font-size: 11px; font-weight: 500; margin-right: 2px; }
+.meta-pill.timer-pill { min-width: 110px; }
+.timer-val { font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.timer-val.warning { color: #F87171; animation: blink .8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+/* ===== LAYOUT ===== */
+.exam-layout {
+  display: flex; padding-top: 58px; min-height: 100vh;
+}
+.exam-main {
+  flex: 1; min-width: 0;
+  padding: 28px 28px 120px 28px;
+  max-width: 900px;
+}
+.exam-sidebar {
+  width: 280px; flex-shrink: 0;
+  padding: 20px 16px 80px 0;
+  position: sticky; top: 58px; height: calc(100vh - 58px);
+  overflow-y: auto;
+}
+
+/* ===== QUESTION CARD ===== */
+.question-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 14px; padding: 28px 30px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn .22s ease;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+.q-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+.q-num-badge {
+  background: var(--navy); color: #fff; font-size: 12px; font-weight: 700;
+  padding: 4px 12px; border-radius: 100px;
+}
+.q-tags { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.domain-tag {
+  background: var(--navy-light); color: var(--navy-mid); font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px; letter-spacing: .02em;
+}
+.multi-tag {
+  background: #FFF3CD; color: #7B5000; font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px;
+}
+
+.question-text {
+  font-size: 15.5px; font-weight: 600; line-height: 1.65; color: var(--text-1);
+  margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1.5px solid var(--border);
+}
+.multi-notice {
+  background: #FFF8E7; border: 1px solid #FFD97A; border-radius: 8px;
+  padding: 8px 14px; font-size: 13px; font-weight: 600; color: #7B5000;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+
+/* OPTIONS */
+.options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.option-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; border: 2px solid var(--border);
+  border-radius: 10px; cursor: pointer; background: #FAFBFC;
+  transition: border-color .18s, background .18s, transform .12s;
+  user-select: none;
+}
+.option-item:hover { border-color: var(--navy-mid); background: var(--navy-light); transform: translateX(2px); }
+.option-item.selected { border-color: var(--navy); background: var(--navy-light); }
+.option-item.correct-ans { border-color: var(--correct); background: var(--correct-bg); }
+.option-item.wrong-ans   { border-color: var(--wrong);   background: var(--wrong-bg);   }
+.option-item.no-select   { cursor: default; }
+.option-item.no-select:hover { transform: none; }
+
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; margin-top: 1px;
+  background: var(--border); color: var(--text-2);
+  transition: background .18s, color .18s;
+}
+.option-item.selected .opt-letter { background: var(--navy); color: #fff; }
+.option-item.correct-ans .opt-letter { background: var(--correct); color: #fff; }
+.option-item.wrong-ans   .opt-letter { background: var(--wrong); color: #fff; }
+
+.opt-label { font-size: 14.5px; line-height: 1.55; color: var(--text-1); flex: 1; padding-top: 2px; }
+.opt-icon { font-size: 17px; margin-top: 3px; flex-shrink: 0; }
+
+/* ORDERING & MATCHING QUESTION TYPES */
+.order-row, .match-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border: 2px solid var(--border);
+  border-radius: 10px; background: #FAFBFC;
+}
+.order-row .order-label { font-size: 14.5px; line-height: 1.55; color: var(--text-1); flex: 1; }
+.match-row .match-label { font-size: 14.5px; line-height: 1.55; color: var(--text-1); }
+.match-arrow { color: var(--text-3); font-size: 16px; flex-shrink: 0; }
+.order-select, .match-select {
+  border: 1.5px solid var(--border); border-radius: 8px; padding: 9px 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--navy);
+  background: #fff; cursor: pointer; flex-shrink: 0;
+}
+.order-select { min-width: 110px; }
+.match-select { min-width: 200px; }
+.order-select:focus, .match-select:focus { outline: none; border-color: var(--navy); }
+.order-row.no-select, .match-row.no-select { cursor: default; }
+.order-row.correct-ans, .match-row.correct-ans { border-color: var(--correct); background: var(--correct-bg); }
+.order-row.wrong-ans, .match-row.wrong-ans { border-color: var(--wrong); background: var(--wrong-bg); }
+.order-row .opt-letter { flex-shrink: 0; }
+
+/* EXPLANATION */
+.explanation-box {
+  margin-top: 20px; padding: 16px 18px;
+  background: #EFF6FF; border: 1.5px solid #BFDBFE;
+  border-radius: 10px; display: none;
+}
+.explanation-box.show { display: block; }
+.exp-header { font-size: 13px; font-weight: 800; color: #1D4ED8; margin-bottom: 6px; letter-spacing: .02em; }
+.exp-text { font-size: 14px; line-height: 1.65; color: #1E3A8A; }
+
+/* Q NAV BUTTONS */
+.q-nav-btns {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 24px; flex-wrap: wrap; gap: 12px;
+}
+.btn-flag {
+  display: flex; align-items: center; gap: 7px;
+  background: transparent; border: 2px solid var(--amber);
+  color: var(--amber); font-size: 13px; font-weight: 700;
+  padding: 9px 16px; border-radius: 8px; cursor: pointer;
+  transition: background .18s, color .18s;
+}
+.btn-flag:hover, .btn-flag.flagged { background: var(--amber-bg); }
+.btn-flag.flagged { border-color: var(--amber); color: var(--amber); }
+.btn-flag.flagged::before { content: '🚩 '; }
+
+.btn-nav {
+  background: var(--navy); color: #fff; border: none;
+  font-size: 14px; font-weight: 700; padding: 11px 22px;
+  border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: background .18s, transform .12s;
+}
+.btn-nav:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-nav:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+.btn-nav.prev { background: var(--surface); color: var(--navy); border: 2px solid var(--border); }
+.btn-nav.prev:hover { border-color: var(--navy); }
+
+/* ===== SIDEBAR ===== */
+.sidebar-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 16px; margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.sidebar-title { font-size: 11.5px; font-weight: 800; color: var(--text-3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+
+/* Question Navigator Grid */
+.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+.nav-btn {
+  width: 100%; aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11.5px; font-weight: 700; border-radius: 7px;
+  cursor: pointer; border: 2px solid var(--border);
+  background: var(--surface); color: var(--text-2);
+  transition: all .15s; position: relative;
+}
+.nav-btn:hover { border-color: var(--navy); color: var(--navy); }
+.nav-btn.current { border-color: var(--navy); background: var(--navy); color: #fff; }
+.nav-btn.answered { border-color: var(--green); background: var(--green-bg); color: var(--green-dark); }
+.nav-btn.flagged-q { border-color: var(--amber); }
+.nav-btn.flagged-q::after {
+  content: ''; position: absolute; top: 1px; right: 1px;
+  width: 6px; height: 6px; background: var(--amber); border-radius: 50%;
+}
+.nav-btn.answered.flagged-q { background: var(--green-bg); }
+.nav-btn.correct-r { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+.nav-btn.wrong-r   { border-color: var(--wrong);   background: var(--wrong-bg);   color: var(--wrong);   }
+
+/* Legend */
+.legend { display: flex; flex-direction: column; gap: 7px; }
+.legend-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; border: 1.5px solid transparent; }
+.ld-ans  { background: var(--green-bg); border-color: var(--green); }
+.ld-cur  { background: var(--navy); border-color: var(--navy); }
+.ld-flag { background: var(--surface); border-color: var(--amber); position:relative; }
+.ld-flag::after { content:''; position:absolute; top:-1px; right:-1px; width:5px; height:5px; background:var(--amber); border-radius:50%; }
+.ld-unan { background: var(--surface); border-color: var(--border); }
+
+/* Stats */
+.stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 13px; }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { color: var(--text-2); }
+.stat-val { font-weight: 700; color: var(--text-1); }
+
+/* Submit button in sidebar */
+.btn-submit-sidebar {
+  width: 100%; padding: 13px; background: var(--green); color: #fff;
+  font-size: 14px; font-weight: 800; border: none; border-radius: 10px;
+  cursor: pointer; transition: background .18s, transform .12s;
+  letter-spacing: .01em;
+}
+.btn-submit-sidebar:hover { background: var(--green-mid); transform: translateY(-1px); }
+.btn-submit-sidebar:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* ===== START SCREEN ===== */
+#start-screen {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px;
+}
+.start-container {
+  background: var(--surface); border-radius: 20px; padding: 44px 40px;
+  max-width: 680px; width: 100%; box-shadow: 0 12px 40px rgba(0,0,0,.12);
+  text-align: center;
+}
+.start-logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 28px; }
+.start-logo-badge { background: var(--navy); color: #fff; font-weight: 800; font-size: 14px; padding: 8px 14px; border-radius: 8px; }
+.start-logo-badge span { color: var(--green); }
+.cert-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy-light); color: var(--navy-mid); font-size: 12px; font-weight: 700;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; letter-spacing: .04em;
+}
+.start-h1 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
+.start-h1 span { color: var(--green-mid); }
+.start-sub { font-size: 15px; color: var(--text-2); line-height: 1.6; margin-bottom: 28px; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; margin-bottom: 28px; }
+.info-item-box {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 14px 16px;
+}
+.info-item-box .i-label { font-size: 11px; font-weight: 700; color: var(--text-3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 4px; }
+.info-item-box .i-val { font-size: 15px; font-weight: 700; color: var(--text-1); }
+
+.domain-table { text-align: left; width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.domain-table th { font-size: 11px; font-weight: 700; color: var(--text-3); letter-spacing: .07em; text-transform: uppercase; padding: 6px 10px; border-bottom: 2px solid var(--border); }
+.domain-table td { font-size: 13.5px; color: var(--text-2); padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.domain-table td:last-child { font-weight: 700; color: var(--navy-mid); text-align: right; }
+
+.rules-box { background: #FFF8E7; border: 1.5px solid #FFD97A; border-radius: 10px; padding: 14px 16px; text-align: left; margin-bottom: 28px; }
+.rules-box .rules-title { font-size: 12px; font-weight: 800; color: #7B5000; margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; }
+.rules-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.rules-box li { font-size: 13px; color: #7B5000; display: flex; align-items: flex-start; gap: 8px; }
+.rules-box li::before { content: '⚠'; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+.btn-start {
+  width: 100%; padding: 16px; background: var(--green); color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 800;
+  border: none; border-radius: 12px; cursor: pointer;
+  box-shadow: 0 6px 20px rgba(141,198,63,.4);
+  transition: background .18s, transform .15s, box-shadow .18s;
+}
+.btn-start:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(141,198,63,.45); }
+
+/* ===== BLUR WARNING OVERLAY ===== */
+#blur-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(17,18,40,.93); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#blur-overlay.show { display: flex; }
+.blur-box {
+  background: var(--surface); border-radius: 16px; padding: 36px 32px;
+  max-width: 420px; width: 100%; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.blur-icon { font-size: 48px; margin-bottom: 12px; }
+.blur-h { font-size: 20px; font-weight: 800; color: var(--red); margin-bottom: 8px; }
+.blur-p { font-size: 14px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
+.blur-count-warning { background: var(--red-bg); border: 1.5px solid #FCA5A5; border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 20px; }
+.btn-return {
+  background: var(--navy); color: #fff; border: none;
+  padding: 13px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.btn-return:hover { background: var(--navy-mid); }
+
+/* ===== CONFIRM MODAL ===== */
+#confirm-modal {
+  display: none; position: fixed; inset: 0; z-index: 8888;
+  background: rgba(0,0,0,.6); align-items: center; justify-content: center; padding: 20px;
+}
+#confirm-modal.show { display: flex; }
+.modal-box {
+  background: var(--surface); border-radius: 14px; padding: 28px 30px;
+  max-width: 440px; width: 100%; box-shadow: 0 16px 50px rgba(0,0,0,.3);
+}
+.modal-title { font-size: 17px; font-weight: 800; color: var(--text-1); margin-bottom: 10px; }
+.modal-body { font-size: 14px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
+.modal-row { display: flex; gap: 10px; justify-content: flex-end; }
+.btn-modal-cancel { background: var(--bg); border: 2px solid var(--border); color: var(--text-2); padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.btn-modal-ok { background: var(--green); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.btn-modal-ok:hover { background: var(--green-mid); }
+.unanswered-list { background: var(--amber-bg); border: 1px solid #FCD34D; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #7B5000; margin-bottom: 14px; }
+
+/* ===== RESULTS SCREEN ===== */
+#result-screen {
+  display: none; min-height: 100vh; padding: 58px 20px 40px;
+}
+.result-wrapper { max-width: 800px; margin: 0 auto; padding: 28px 0; }
+.result-hero {
+  background: var(--surface); border-radius: 16px; padding: 32px 30px;
+  box-shadow: var(--shadow-md); text-align: center; margin-bottom: 20px; border: 1.5px solid var(--border);
+}
+.result-logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 22px; }
+.result-pass-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 18px; border-radius: 100px; font-size: 14px; font-weight: 800; margin-bottom: 12px;
+}
+.badge-pass { background: #D1FAE5; color: var(--correct); }
+.badge-fail { background: #FEE2E2; color: var(--red); }
+.result-pct { font-size: 60px; font-weight: 800; line-height: 1; margin: 8px 0; }
+.pct-pass { color: var(--correct); }
+.pct-fail { color: var(--red); }
+.result-scaled { font-size: 20px; font-weight: 700; color: var(--text-2); margin-bottom: 4px; }
+.result-scaled span { color: var(--text-1); font-weight: 800; }
+.result-correct-row { font-size: 14px; color: var(--text-3); margin-top: 6px; }
+.result-correct-row strong { color: var(--text-2); }
+
+.domain-breakdown {
+  background: var(--surface); border-radius: 16px; padding: 24px 26px;
+  box-shadow: var(--shadow-sm); margin-bottom: 20px; border: 1.5px solid var(--border);
+}
+.breakdown-title { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 16px; }
+.domain-row-r {
+  display: grid; grid-template-columns: 1fr 80px 60px;
+  gap: 12px; align-items: center; padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.domain-row-r:last-child { border-bottom: none; }
+.dr-name { font-size: 14px; color: var(--text-2); font-weight: 500; }
+.dr-score { font-size: 13.5px; color: var(--text-3); text-align: center; font-variant-numeric: tabular-nums; }
+.dr-pct { text-align: right; font-size: 13.5px; font-weight: 800; padding: 3px 8px; border-radius: 6px; }
+.dr-good { background: #D1FAE5; color: var(--correct); }
+.dr-mid  { background: #FEF3C7; color: var(--amber); }
+.dr-bad  { background: #FEE2E2; color: var(--red); }
+
+.result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-retake {
+  background: var(--navy); color: #fff; border: none;
+  padding: 14px 32px; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .18s, transform .12s;
+}
+.btn-retake:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-review {
+  background: var(--surface); color: var(--navy); border: 2px solid var(--navy);
+  padding: 14px 32px; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .18s, transform .12s;
+}
+.btn-review:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+/* ===== REVIEW MODE ===== */
+#review-screen { display: none; padding: 80px 20px 60px; }
+.review-wrapper { max-width: 820px; margin: 0 auto; }
+.review-q-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 24px 26px; margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.review-q-card.rq-correct { border-left: 4px solid var(--correct); }
+.review-q-card.rq-wrong   { border-left: 4px solid var(--red); }
+.rq-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.rq-result-tag { font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 100px; }
+.rq-correct-tag { background: #D1FAE5; color: var(--correct); }
+.rq-wrong-tag   { background: #FEE2E2; color: var(--red); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar-wrap { height: 3px; background: rgba(255,255,255,.15); position: fixed; top: 58px; left: 0; right: 0; z-index: 199; }
+.progress-bar-fill { height: 100%; background: var(--green); transition: width .3s ease; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .exam-sidebar { display: none; }
+  .exam-main { padding: 20px 16px 100px; }
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  .start-container { padding: 28px 20px; }
+}
+@media (max-width: 500px) {
+  .info-grid { grid-template-columns: 1fr; }
+  .exam-header-meta .meta-pill:not(.timer-pill) { display: none; }
+}
+
+/* Mobile bottom nav */
+.mobile-nav-bar {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+  background: var(--surface); border-top: 1.5px solid var(--border);
+  padding: 10px 16px; gap: 10px; align-items: center; justify-content: space-between;
+}
+@media (max-width: 768px) { .mobile-nav-bar { display: flex; } }
+.mob-answered { font-size: 12px; color: var(--text-3); font-weight: 600; }
+.mob-answered strong { color: var(--text-1); }
+
+/* ===== PRINT HIDE ===== */
+@media print { #blur-overlay, #confirm-modal, .exam-header, .progress-bar-wrap { display: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ========== START SCREEN ========== -->
+<div id="start-screen">
+  <div class="start-container">
+    <div class="start-logo-row">
+      <div class="start-logo-badge">K21 <span>Academy</span></div>
+    </div>
+    <div class="cert-badge">
+      <span>📋</span> Microsoft Certification Exam Simulator &mdash; Mock Test 3
+    </div>
+    <h1 class="start-h1">Fabric Data <span>Engineer Associate</span></h1>
+    <p class="start-sub">DP-700 &mdash; Practice in a real exam environment with a timer, question navigator, and instant feedback.</p>
+
+    <div class="info-grid">
+      <div class="info-item-box"><div class="i-label">Questions</div><div class="i-val" id="info-qcount">50 Questions</div></div>
+      <div class="info-item-box"><div class="i-label">Time Limit</div><div class="i-val">100 Minutes</div></div>
+      <div class="info-item-box"><div class="i-label">Passing Score</div><div class="i-val">700 / 1000 (scaled)</div></div>
+      <div class="info-item-box"><div class="i-label">Question Types</div><div class="i-val">Single &amp; Multi-select</div></div>
+    </div>
+
+    <table class="domain-table">
+      <thead><tr><th>Domain</th><th>Topic</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td>Domain 1</td><td>Implement and manage an analytics solution</td><td>30&ndash;35%</td></tr>
+        <tr><td>Domain 2</td><td>Ingest and transform data</td><td>30&ndash;35%</td></tr>
+        <tr><td>Domain 3</td><td>Monitor and optimize an analytics solution</td><td>30&ndash;35%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rules-box">
+      <div class="rules-title">⚠ Exam Rules — Read Before Starting</div>
+      <ul>
+        <li>Do NOT switch tabs or minimize the browser — your exam will be paused and a warning issued.</li>
+        <li>3 tab-switch warnings will automatically end and submit your exam.</li>
+        <li>Multi-select questions require exactly 2 answers. Partial credit is not given.</li>
+        <li>You can flag questions for review and return to them before submitting.</li>
+        <li>Once submitted, answers cannot be changed.</li>
+      </ul>
+    </div>
+
+    <button class="btn-start" onclick="startExam()">▶ &nbsp;Start Exam Now</button>
+  </div>
+</div>
+
+<!-- ========== EXAM SCREEN ========== -->
+<div id="exam-screen" style="display:none;">
+
+  <!-- Fixed Header -->
+  <div class="exam-header">
+    <div class="exam-header-logo">
+      <div class="logo-badge">K21</div>
+      <div class="exam-title">DP-700 &mdash; <span>Fabric Data Engineer</span></div>
+    </div>
+    <div class="exam-header-meta">
+      <div class="meta-pill"><span class="label">Answered</span><span id="hdr-answered">0</span>/<span id="hdr-total">50</span></div>
+      <div class="meta-pill"><span class="label">Flagged</span><span id="hdr-flagged">0</span></div>
+      <div class="meta-pill timer-pill">⏱ <span class="timer-val" id="hdr-timer">100:00</span></div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill"></div></div>
+
+  <!-- Layout -->
+  <div class="exam-layout">
+
+    <!-- Main Question Area -->
+    <div class="exam-main" id="exam-main">
+      <!-- Question card injected here -->
+    </div>
+
+    <!-- Sidebar -->
+    <div class="exam-sidebar">
+      <!-- Stats -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">Progress</div>
+        <div class="stat-row"><span class="stat-label">Answered</span><span class="stat-val" id="sb-answered">0 / 65</span></div>
+        <div class="stat-row"><span class="stat-label">Unanswered</span><span class="stat-val" id="sb-unanswered">50</span></div>
+        <div class="stat-row"><span class="stat-label">Flagged</span><span class="stat-val" id="sb-flagged">0</span></div>
+      </div>
+      <!-- Navigator -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">Question Navigator</div>
+        <div class="nav-grid" id="nav-grid"></div>
+        <div style="margin-top: 14px;">
+          <div class="legend">
+            <div class="legend-row"><div class="legend-dot ld-cur"></div> Current</div>
+            <div class="legend-row"><div class="legend-dot ld-ans"></div> Answered</div>
+            <div class="legend-row"><div class="legend-dot ld-flag"></div> Flagged</div>
+            <div class="legend-row"><div class="legend-dot ld-unan"></div> Unanswered</div>
+          </div>
+        </div>
+      </div>
+      <!-- Submit -->
+      <button class="btn-submit-sidebar" onclick="trySubmit()">Submit Exam →</button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Bottom Bar -->
+  <div class="mobile-nav-bar">
+    <button class="btn-nav prev" onclick="goToPrev()" id="mob-prev">← Prev</button>
+    <span class="mob-answered">Q <strong id="mob-qnum">1</strong> of <strong id="mob-qtotal">50</strong></span>
+    <button class="btn-nav" onclick="trySubmit()" style="background:var(--green); font-size:12px; padding:9px 14px;">Submit</button>
+    <button class="btn-nav" onclick="goToNext()" id="mob-next">Next →</button>
+  </div>
+</div>
+
+<!-- ========== RESULT SCREEN ========== -->
+<div id="result-screen">
+  <div class="result-wrapper">
+    <div class="result-hero">
+      <div class="result-logo-row">
+        <div class="start-logo-badge" style="font-size:13px;">K21 <span style="color:var(--green);">Academy</span></div>
+      </div>
+      <div class="result-pass-badge" id="result-badge"></div>
+      <div class="result-pct" id="result-pct"></div>
+      <div class="result-scaled" id="result-scaled"></div>
+      <div class="result-correct-row" id="result-correct"></div>
+    </div>
+    <div class="domain-breakdown">
+      <div class="breakdown-title">📊 Domain-wise Breakdown</div>
+      <div id="domain-breakdown-rows"></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-retake" onclick="resetExam()">↺ &nbsp;Retake Exam</button>
+      <button class="btn-review" onclick="showReview()">🔍 &nbsp;Review All Questions</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== REVIEW SCREEN ========== -->
+<div id="review-screen">
+  <div class="exam-header">
+    <div class="exam-header-logo">
+      <div class="logo-badge">K21</div>
+      <div class="exam-title">Review Mode &mdash; <span>DP-700</span></div>
+    </div>
+    <div class="exam-header-meta">
+      <button class="btn-nav" onclick="backToResults()" style="font-size:12px;padding:7px 14px;">← Back to Results</button>
+    </div>
+  </div>
+  <div class="review-wrapper" id="review-wrapper"></div>
+</div>
+
+<!-- ========== TAB-BLUR OVERLAY ========== -->
+<div id="blur-overlay">
+  <div class="blur-box">
+    <div class="blur-icon">🚨</div>
+    <div class="blur-h">You Left the Exam!</div>
+    <div class="blur-p">Switching tabs or minimizing the browser is not allowed during the exam.</div>
+    <div class="blur-count-warning" id="blur-count-msg"></div>
+    <button class="btn-return" onclick="returnToExam()">Return to Exam</button>
+  </div>
+</div>
+
+<!-- ========== SUBMIT CONFIRM MODAL ========== -->
+<div id="confirm-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="modal-title">Submit Exam?</div>
+    <div class="modal-body" id="modal-body"></div>
+    <div id="modal-extra"></div>
+    <div class="modal-row">
+      <button class="btn-modal-cancel" id="modal-cancel-btn" onclick="closeModal()">Cancel</button>
+      <button class="btn-modal-ok" id="modal-ok-btn" onclick="confirmSubmit()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DOMAINS = {
+  D1: "Implement and manage an analytics solution",
+  D2: "Ingest and transform data",
+  D3: "Monitor and optimize an analytics solution"
+};
+
+// ===================================================================
+// QUESTION BANK
+// Add / edit / remove questions here. Each item:
+// { domain:"D1", q:"...", options:["A","B","C","D"], answer:[idx,...], multi:true (optional), explanation:"..." }
+// answer is an array of option INDICES (0-based) that are correct.
+// Set multi:true and provide exactly 2 indices in `answer` for select-2 questions.
+// ===================================================================
+const questions = [
+  {
+    "domain": "D1",
+    "q": "You need to configure a Fabric workspace to store its OneLake data in the West Europe Azure region. You are setting up the workspace for the first time. What should you do?",
+    "options": [
+      "Configure OneLake region in workspace settings after creation",
+      "Set the region during initial workspace creation \u2014 the OneLake region cannot be changed after creation",
+      "Change the region in the Spark workspace settings",
+      "Configure the region in the deployment pipeline"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "In Microsoft Fabric, the OneLake region (geographic location of the data storage) is determined by the Fabric capacity region that the workspace is assigned to. The capacity region is set when the capacity is provisioned in the Azure portal and cannot be changed after the workspace is created and data is stored. Spark and deployment settings don't control storage geography."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to ensure that changes to notebooks and pipelines in a Fabric workspace go through a code review process before being merged to the production branch. Which combination of Fabric and Azure DevOps features should you implement?",
+    "options": [
+      "Use Fabric deployment pipelines without any Git integration",
+      "Enable Git integration in the workspace with feature branches, and configure Azure DevOps branch policies requiring pull request approval before merging",
+      "Have all engineers commit directly to the main branch",
+      "Use deployment pipelines to deploy code directly from Dev to Prod without review"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Combining Fabric Git integration (with feature/development branches) and Azure DevOps branch policies (requiring pull request approvals) enforces a code review gate before any changes reach the production branch. Committing directly to main bypasses review; deployment pipelines without Git integration don't enforce code review."
+  },
+  {
+    "domain": "D1",
+    "q": "You have a Fabric workspace and need to configure Apache Airflow to orchestrate complex multi-system workflows that involve Fabric notebooks, external APIs, and Azure services. What should you configure?",
+    "options": [
+      "A Fabric data pipeline with a KQL activity",
+      "Apache Airflow workspace settings in Fabric \u2014 create a Fabric-managed Airflow environment",
+      "A Power BI scheduled refresh",
+      "A Dataflow Gen2 event trigger"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Microsoft Fabric supports Apache Airflow as a managed service through the Apache Airflow workspace settings. This enables creation of DAGs that can orchestrate Fabric notebooks, external APIs, Azure services, and other systems from a central workflow tool. Data pipelines cover simpler orchestration; Power BI refresh and Dataflow Gen2 don't provide multi-system DAG orchestration."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to promote a Fabric lakehouse so it appears prominently in the organization's OneLake data hub as a recommended data source. Which endorsement level should you apply?",
+    "options": [
+      "Promoted \u2014 any workspace contributor can apply it to flag items as recommended",
+      "Certified \u2014 requires a designated certifier or admin and signals official approval",
+      "Featured \u2014 makes the item appear on the Fabric home page",
+      "Tagged \u2014 adds searchable keyword metadata to the item"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Promoted endorsement (also called Promoted or Endorsed) can be applied by any workspace Contributor and signals that the item is recommended for use. Certified requires a designated certifier or tenant admin approval for a higher trust level. 'Featured' and 'Tagged' are not Fabric endorsement levels."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to track every time a user queries a Fabric lakehouse SQL endpoint, capturing the user identity, query text, and timestamp for compliance purposes. Which feature provides this audit trail?",
+    "options": [
+      "OneLake storage metrics",
+      "Microsoft Fabric audit logs via Microsoft Purview or the admin portal",
+      "The Delta table transaction log",
+      "Power BI usage metrics"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Microsoft Fabric audit logs record user activities including queries to the SQL analytics endpoint, capturing user identity, action type, and timestamp. These are accessible via Microsoft Purview or the Fabric admin portal. Delta transaction logs record data changes, not user queries; Power BI usage metrics track report interactions."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to configure a Fabric data pipeline to pass different source file paths to a notebook activity at runtime, depending on the day of the week. Which pipeline feature should you use?",
+    "options": [
+      "Hardcode all seven file paths in seven separate pipeline activities",
+      "Use a pipeline variable or dynamic expression referencing @dayOfWeek(utcnow()) to compute the path, passed as a parameter to the notebook activity",
+      "Create seven separate pipelines",
+      "Use a sensitivity label to encode the file path"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Fabric data pipeline dynamic expressions allow you to compute values at runtime using expression functions. Using @dayOfWeek(utcnow()) within a dynamic expression evaluates to the current day and can be used to construct the correct file path, which is then passed as a parameter to the notebook activity. Hardcoding or separate pipelines are inflexible."
+  },
+  {
+    "domain": "D1",
+    "q": "You have a Fabric workspace. A new data engineer joins the team and needs to run notebooks, create new Delta tables in the lakehouse, and commit code to the connected Git repository, but should not be able to change workspace settings. Which role should you assign?",
+    "options": [
+      "Admin",
+      "Member",
+      "Contributor",
+      "Viewer"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "Contributor role in Fabric allows creating and editing workspace items (notebooks, lakehouses, Delta tables) and committing to the connected Git repository. Contributors cannot manage workspace settings, license mode, or membership. Admin and Member can manage settings; Viewer can only read items."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to implement column-level security in a Fabric warehouse so that a group named HRViewers cannot see the Salary column in the Employees table. Which T-SQL statement implements this?",
+    "options": [
+      "GRANT SELECT ON Employees TO HRViewers",
+      "DENY SELECT ON Employees(Salary) TO HRViewers",
+      "REVOKE INSERT ON Employees(Salary) FROM HRViewers",
+      "CREATE SECURITY POLICY HRViewers ON Employees FILTER"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Column-level security on a Fabric warehouse table is implemented using DENY SELECT on the specific column for the target role/user. DENY SELECT ON Employees(Salary) TO HRViewers prevents that group from querying the Salary column. GRANT gives access; REVOKE INSERT is unrelated to column-level read access; CREATE SECURITY POLICY is used for row-level, not column-level, security."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to configure a Fabric workspace to use a custom Spark pool with 8 nodes of Standard_E8s_v5 instead of the default Fabric Spark pool. Where should you configure this?",
+    "options": [
+      "In the lakehouse settings",
+      "In the Spark workspace settings \u2014 select a custom pool and configure node type and size",
+      "In the workspace Admin settings",
+      "In the deployment pipeline stages"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Fabric Spark workspace settings allow you to configure the default Spark pool, including selecting custom pools with specific node types, sizes, and autoscaling settings. Lakehouse settings don't configure Spark compute; workspace admin settings control access; deployment pipeline stages control promotion, not compute resources."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to ensure that a Fabric semantic model is identified as the official, IT-approved data source for the entire organization. Which endorsement level should you apply, and who can apply it?",
+    "options": [
+      "Promoted \u2014 any workspace contributor",
+      "Certified \u2014 requires a designated certifier or admin in the tenant",
+      "Featured \u2014 any report author",
+      "Highlighted \u2014 any workspace member"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Certified endorsement requires a designated certifier (configured in the tenant's Fabric admin settings) to explicitly approve and certify the item. It represents the highest trust level and signals official IT approval. Promoted is applied by contributors for 'recommended' status; 'Featured' and 'Highlighted' are not standard Fabric endorsement levels."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to design an orchestration pattern in Fabric where Notebook_A and Notebook_B run in parallel, and only after both complete successfully does Notebook_C run. Which pipeline design achieves this?",
+    "options": [
+      "Connect Notebook_A and Notebook_B sequentially, then connect Notebook_B to Notebook_C",
+      "Run all three notebooks without any dependencies",
+      "Connect both Notebook_A and Notebook_B to Notebook_C using 'On Success' connectors so Notebook_C waits for both to complete",
+      "Run Notebook_C in a separate pipeline triggered by a schedule"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "When two activities (Notebook_A and Notebook_B) are both connected to a downstream activity (Notebook_C) with 'On Success' connectors, the downstream activity waits for all upstream activities to complete before executing. This implements a fan-in pattern where parallel activities must all succeed before the next step. Sequential connection would not run A and B in parallel."
+  },
+  {
+    "domain": "D1",
+    "type": "ordering",
+    "q": "Arrange the steps to configure version control for a new Fabric workspace and make the initial commit to an Azure DevOps repository.",
+    "items": [
+      "Commit the initial workspace content to the connected branch",
+      "Create the Azure DevOps project and repository, and create the target branch",
+      "Connect the Fabric workspace to the Azure DevOps repository in workspace Git integration settings",
+      "Review the Git status panel to confirm workspace items are recognized as uncommitted"
+    ],
+    "correctSequence": [
+      1,
+      2,
+      3,
+      0
+    ],
+    "explanation": "Setting up version control starts by creating the Azure DevOps project and repository with the target branch, then connecting the workspace to that repository via Git integration settings, then reviewing the Git status to see which items need to be committed, and finally committing the initial workspace content."
+  },
+  {
+    "domain": "D1",
+    "multi": true,
+    "q": "You are designing a security model for a Fabric lakehouse solution with a bronze, silver, and gold layer. Which TWO access control configurations correctly enforce the security requirement that data analysts can read only the gold layer?",
+    "options": [
+      "Share only the gold layer lakehouse with the DataAnalysts group and grant 'Read all SQL Endpoint data'",
+      "Do NOT add the DataAnalysts group to the workspace role \u2014 use item-level sharing instead",
+      "Add the DataAnalysts group to the Viewer role in the workspace (which grants access to all layers)",
+      "Grant DataAnalysts 'Read all Apache Spark' on the gold lakehouse"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Sharing only the gold lakehouse with 'Read all SQL Endpoint data' grants read access to the gold layer Delta tables only. NOT adding the group to the workspace role prevents them from seeing bronze and silver lakehouses. Workspace Viewer role grants access to all workspace items including all lakehouse layers; 'Read all Apache Spark' grants broader file-level access beyond the SQL endpoint."
+  },
+  {
+    "domain": "D1",
+    "type": "matching",
+    "q": "Match each Fabric orchestration tool on the left to its most appropriate use case on the right.",
+    "left": [
+      "Fabric data pipeline",
+      "Apache Airflow in Fabric",
+      "Scheduled notebook",
+      "Deployment pipeline"
+    ],
+    "right": [
+      "Promoting workspace items from Development to Test to Production",
+      "Triggering a simple daily notebook run with a Fabric schedule",
+      "Orchestrating complex multi-system workflows with conditional branching across external services",
+      "Ingesting and transforming data with built-in connectors, retry, and alerting"
+    ],
+    "correctMap": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "explanation": "Data pipelines are best for data ingestion/transformation with connectors and retry. Apache Airflow suits complex multi-system orchestration with conditional branching. Scheduled notebooks handle simple daily executions. Deployment pipelines promote workspace items across development stages."
+  },
+  {
+    "domain": "D2",
+    "q": "You have a Fabric workspace. You need to ingest data from an Amazon S3 bucket without copying it to OneLake, to minimize cross-cloud egress costs. The data must be queryable via Spark. Which feature should you use?",
+    "options": [
+      "A data pipeline Copy Data activity targeting the lakehouse",
+      "A OneLake shortcut pointing to the Amazon S3 bucket",
+      "Fabric mirroring configured for the S3 source",
+      "A Dataflow Gen2 import from S3"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "OneLake shortcuts create a logical link to the S3 bucket so data can be queried directly through Spark (or the SQL endpoint) without physically copying it to OneLake, eliminating cross-cloud egress costs. Copy Data and Dataflow Gen2 physically move data, incurring egress costs; Fabric mirroring is designed for relational database sources, not S3 object storage."
+  },
+  {
+    "domain": "D2",
+    "q": "You are writing a PySpark notebook to handle late-arriving IoT sensor data. Events may arrive up to 2 hours after they were generated. You need to ensure events within the 2-hour late threshold are still included in their correct time window. Which Structured Streaming feature should you use?",
+    "options": [
+      "spark.conf.set('spark.streaming.timeout', '2h')",
+      "withWatermark('EventTime', '2 hours') combined with a window aggregation",
+      "df.filter('EventTime > now() - 2 hours')",
+      "Setting the trigger interval to 2 hours"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "withWatermark('EventTime', '2 hours') tells Spark Structured Streaming to tolerate events arriving up to 2 hours late and include them in the appropriate time window. Events older than the watermark threshold are discarded. This is the standard mechanism for handling late data in streaming pipelines. Trigger interval controls micro-batch frequency, not data latency tolerance."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to implement KQL in a Fabric Eventhouse to compute the maximum temperature per device for each 15-minute tumbling window over the past 6 hours. Which KQL query pattern is correct?",
+    "options": [
+      "SensorData | where Timestamp >= ago(6h) | summarize max(Temperature) by DeviceID, bin(Timestamp, 15m)",
+      "SensorData | top 6 by Timestamp | max Temperature",
+      "SensorData | filter Timestamp > now()-6h | group by bin(Timestamp, 15m)",
+      "SensorData | select DeviceID, max(Temperature) WHERE Timestamp > GETDATE()-6"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "KQL uses the 'summarize' operator for aggregation and 'bin()' for time-based bucketing. 'bin(Timestamp, 15m)' creates 15-minute tumbling windows, and 'summarize max(Temperature) by DeviceID, bin(Timestamp, 15m)' computes the max temperature per device per window. The other options use incorrect syntax ('top', 'filter', 'group by', 'select', 'WHERE', 'GETDATE' are not KQL)."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to design a loading pattern for a Fabric warehouse that receives daily product updates. Some products are new (INSERT), some have changed attributes (UPDATE), and a small number have been discontinued (logical DELETE via an IsActive flag). Which T-SQL statement handles all three cases in one operation?",
+    "options": [
+      "INSERT INTO ... SELECT WHERE IsNew = 1",
+      "TRUNCATE TABLE Products; INSERT INTO Products SELECT * FROM source",
+      "MERGE INTO Products USING source ON Products.ProductID = source.ProductID WHEN MATCHED THEN UPDATE ... WHEN NOT MATCHED THEN INSERT ... WHEN NOT MATCHED BY SOURCE THEN UPDATE SET IsActive = 0",
+      "SELECT INTO Products FROM source"
+    ],
+    "answer": [
+      2
+    ],
+    "explanation": "MERGE INTO handles inserts (WHEN NOT MATCHED), updates (WHEN MATCHED), and logical deletes (WHEN NOT MATCHED BY SOURCE \u2014 updating IsActive = 0 for rows in target not present in source) in a single atomic statement. This is the standard upsert+soft-delete pattern. TRUNCATE+INSERT is a full reload; INSERT only adds new rows; SELECT INTO creates a new table."
+  },
+  {
+    "domain": "D2",
+    "q": "You have a Fabric lakehouse Delta table that partitions data by Year. A PySpark query filters WHERE Year = 2024. Which Delta Lake optimization ensures that Spark reads only the 2024 partition and skips all other data?",
+    "options": [
+      "ZORDER BY Year",
+      "Partition pruning \u2014 Spark automatically skips partitions that don't match the WHERE filter",
+      "V-Order optimization",
+      "OPTIMIZE on the Delta table"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Partition pruning is the automatic Spark optimization where the query engine skips data files in partitions that don't match the filter predicate. For a table partitioned by Year, a filter WHERE Year = 2024 causes Spark to read only the Year=2024 partition folder, drastically reducing I/O. ZORDER co-locates data within partitions but doesn't enable pruning across partitions; V-Order and OPTIMIZE are separate file-level optimizations."
+  },
+  {
+    "domain": "D2",
+    "q": "You have a raw data file in CSV format containing customer records, some with missing email addresses. You need to load only records with a valid email address (non-null) into a Fabric lakehouse Delta table using PySpark. Which code pattern is correct?",
+    "options": [
+      "df = spark.read.csv(path); df.write.delta(target_path)",
+      "df = spark.read.csv(path, header=True); df_filtered = df.filter(df.Email.isNotNull()); df_filtered.write.format('delta').save(target_path)",
+      "df = spark.read.csv(path); df.count()",
+      "df = spark.read.csv(path); df.drop('Email').write.delta(target_path)"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Reading the CSV with header=True, filtering with df.filter(df.Email.isNotNull()) to keep only records with email values, and writing to Delta format at the target path is the correct pattern. The first option writes all rows including nulls; df.count() doesn't load to Delta; df.drop() removes the column entirely rather than filtering null rows."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to implement Fabric mirroring from an Azure SQL Database to a Fabric lakehouse for near-real-time analytics. After setting up mirroring, you need to verify that changes are being replicated. Where should you check?",
+    "options": [
+      "The Azure SQL Database transaction log directly",
+      "The Fabric mirroring monitoring page, which shows replication status, latency, and any errors",
+      "The Power BI semantic model refresh history",
+      "The Fabric deployment pipeline stage status"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Fabric mirroring includes a dedicated monitoring page in the Fabric portal that shows the replication status for each mirrored table, current replication latency, any errors, and whether mirroring is active. This is the correct place to verify replication health. Azure SQL transaction logs require direct database access; Power BI refresh and deployment pipeline status are unrelated to mirroring."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to aggregate sales data in a Fabric lakehouse using PySpark and compute both the total sales per region AND a grand total across all regions in a single query. Which PySpark/SQL function produces rollup totals?",
+    "options": [
+      "df.groupBy('Region').sum('Sales')",
+      "spark.sql('SELECT Region, SUM(Sales) FROM FactSales GROUP BY ROLLUP(Region)')",
+      "df.pivot('Region').agg({'Sales':'sum'})",
+      "spark.sql('SELECT Region, SUM(Sales) FROM FactSales GROUP BY CUBE(Region)')"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "GROUP BY ROLLUP(Region) computes subtotals at each level of the specified hierarchy \u2014 in this case, total sales per Region AND a grand total row (where Region is NULL). CUBE computes all possible subtotals across all dimensions; pivot creates a wide-format table; a simple groupBy produces only per-region totals without a grand total."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to load historical data from 12 large Parquet files stored in an Amazon S3 bucket into a Fabric lakehouse bronze layer without saving a copy in OneLake. The requirement is to minimize egress costs. What is the correct approach?",
+    "options": [
+      "Use a data pipeline Copy Data activity to copy all 12 files to the lakehouse Files section",
+      "Create a OneLake shortcut to the S3 bucket, then read from the shortcut using Spark to transform and write to the silver layer as Delta",
+      "Set up Fabric mirroring from S3",
+      "Use Dataflow Gen2 to import all 12 files"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Creating a OneLake shortcut to the S3 bucket allows Spark to read the Parquet files directly from S3 without copying them to OneLake, minimizing egress costs. The shortcut appears as a folder in the lakehouse that Spark can read from. Data pipeline Copy Data and Dataflow Gen2 physically copy data; Fabric mirroring is for relational databases, not S3 object storage."
+  },
+  {
+    "domain": "D2",
+    "q": "You have a PySpark streaming job reading from an Eventstream in Fabric. You need to write the processed stream to a Fabric lakehouse Delta table using checkpointing to support fault-tolerant, exactly-once processing. Which Spark Structured Streaming option enables this?",
+    "options": [
+      "df.write.format('delta').save(path)",
+      "df.writeStream.format('delta').option('checkpointLocation', checkpoint_path).start(target_path)",
+      "df.write.mode('append').parquet(path)",
+      "df.persist().write.delta(path)"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "df.writeStream.format('delta').option('checkpointLocation', checkpoint_path).start(target_path) is the correct Spark Structured Streaming write pattern. The checkpointLocation stores streaming progress and offsets, enabling fault-tolerant exactly-once processing by allowing the stream to resume from where it left off after a failure. df.write is for batch writes, not streaming."
+  },
+  {
+    "domain": "D2",
+    "type": "ordering",
+    "q": "Arrange the steps to implement a Fabric Eventstream that ingests IoT events from Azure Event Hubs and routes them to a Fabric Eventhouse KQL table.",
+    "items": [
+      "Query the Eventhouse KQL table to verify events are arriving correctly",
+      "Create the Fabric Eventstream and configure Azure Event Hubs as the source",
+      "Configure the Eventhouse as the Eventstream destination and map the schema",
+      "Create the Eventhouse and KQL database with the target table schema"
+    ],
+    "correctSequence": [
+      3,
+      1,
+      2,
+      0
+    ],
+    "explanation": "Building the Eventstream pipeline starts with creating the Eventhouse and KQL database with the target table, then creating the Eventstream with Event Hubs as the source, then configuring the Eventhouse destination and mapping schema fields, and finally querying the Eventhouse to verify events are flowing correctly."
+  },
+  {
+    "domain": "D2",
+    "multi": true,
+    "q": "You need to choose a Fabric data store for two different workloads: (1) streaming IoT data requiring real-time KQL queries, and (2) large historical batch data requiring SQL analytics and Power BI Direct Lake. Which TWO choices correctly match the workload to the store?",
+    "options": [
+      "Use a Fabric Eventhouse for streaming IoT data that requires real-time KQL queries",
+      "Use a Fabric lakehouse for large historical batch data that requires SQL analytics and Power BI Direct Lake",
+      "Use a Fabric warehouse for streaming IoT data with real-time KQL queries",
+      "Use a Power BI datamart for large historical batch data"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Eventhouses (KQL databases) are purpose-built for real-time event and time-series data with KQL querying. Fabric lakehouses with Delta tables are optimized for large-scale batch analytics via the SQL endpoint and Power BI Direct Lake mode. Warehouses don't natively support KQL for real-time streaming; Power BI datamarts are lightweight SQL stores, not designed for large historical batch workloads."
+  },
+  {
+    "domain": "D2",
+    "type": "matching",
+    "q": "Match each Fabric data loading concept on the left to its description on the right.",
+    "left": [
+      "SCD Type 1",
+      "SCD Type 2",
+      "Watermark pattern",
+      "Full overwrite load"
+    ],
+    "right": [
+      "Truncates the target and reloads all data on every run",
+      "Tracks history by inserting new rows with date ranges for each change",
+      "Overwrites changed attribute values \u2014 no history is preserved",
+      "Uses the last processed timestamp to load only new or changed records"
+    ],
+    "correctMap": [
+      2,
+      1,
+      3,
+      0
+    ],
+    "explanation": "SCD Type 1 overwrites changed values without preserving history. SCD Type 2 inserts new rows with StartDate/EndDate to track history. The watermark pattern uses a timestamp to identify and load only incremental changes. Full overwrite truncates and reloads all data each run."
+  },
+  {
+    "domain": "D3",
+    "q": "A Fabric data pipeline has been running for 6 hours and has not completed. Yesterday it completed in 30 minutes. The pipeline includes a Copy Data activity from an on-premises SQL Server. Where should you look first?",
+    "options": [
+      "The Power BI report linked to the pipeline output",
+      "The pipeline activity run details \u2014 check the on-premises gateway throughput and source query performance",
+      "The Fabric capacity admin portal \u2014 check for throttling events",
+      "The OneLake storage metrics"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "A sudden dramatic increase in pipeline runtime (30 minutes to 6+ hours) typically indicates a bottleneck in data movement. Checking the Copy Data activity's run details reveals transferred bytes, throughput, and duration per source/sink. If gateway throughput is low, it may indicate a slow source query, network issue, or gateway resource contention. Capacity throttling would affect all workloads, not just one pipeline."
+  },
+  {
+    "domain": "D3",
+    "q": "A Fabric Spark notebook fails with 'SparkException: Job aborted due to stage failure: Task 0 in stage 3.0 failed 4 times'. The notebook reads a large partitioned Delta table. What is the most common cause?",
+    "options": [
+      "The Delta table has too few columns",
+      "A Spark executor ran out of memory or a corrupt data file was encountered in one of the table partitions",
+      "The Power BI report has too many visuals",
+      "The workspace Git branch is behind main"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Stage failure with repeated task failures usually indicates either an executor ran out of memory processing a large partition ('skewed' partition with too much data) or a corrupt/unreadable file in one of the Delta table partitions. Increasing executor memory, repartitioning to avoid skew, or identifying and fixing the corrupt file are the appropriate resolutions."
+  },
+  {
+    "domain": "D3",
+    "q": "You need to optimize a Fabric warehouse T-SQL query that aggregates 2 billion rows and is running for over an hour. The query uses multiple GROUP BY operations and several JOINs to dimension tables. Which optimization strategy should you try first?",
+    "options": [
+      "Increase the number of report pages in Power BI",
+      "Update statistics on the involved tables and review the query execution plan for inefficient operations",
+      "Rename the tables",
+      "Add more text columns to the fact table"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "For complex aggregation queries in Fabric warehouse, stale statistics can cause the query optimizer to choose poor execution plans (wrong join order, wrong join type). Running UPDATE STATISTICS and reviewing the query plan to identify full scans, large spills, or bad join strategies are the primary optimization steps for slow T-SQL queries."
+  },
+  {
+    "domain": "D3",
+    "q": "You have a Fabric lakehouse. Users report that a Power BI Direct Lake report based on this lakehouse is showing errors for some tables. The errors indicate 'fallback to DirectQuery occurred'. What does this mean and what should you do?",
+    "options": [
+      "Direct Lake fell back to DirectQuery mode because the Fabric capacity limits were exceeded or the table is not optimized; run OPTIMIZE and check the capacity limits",
+      "The Power BI report needs more visuals",
+      "The lakehouse needs to be converted to a warehouse",
+      "Direct Lake always falls back to DirectQuery \u2014 this is expected behavior"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Direct Lake falls back to DirectQuery when the table exceeds the VertiPaq framing limits for the capacity SKU (such as too many rows, unsupported data types, or unoptimized files). Running OPTIMIZE (and enabling V-Order) on the Delta tables and verifying the data fits within the capacity's framing limits resolves most fallback scenarios."
+  },
+  {
+    "domain": "D3",
+    "q": "A Fabric Eventstream is configured to route events to both a lakehouse and an Eventhouse. Users report that the lakehouse destination is receiving events, but the Eventhouse destination is not. What should you check first?",
+    "options": [
+      "The Power BI report linked to the Eventhouse",
+      "The Eventstream destination configuration for the Eventhouse \u2014 check authentication, table mapping, and connectivity to the Eventhouse",
+      "The lakehouse destination credentials",
+      "The Spark workspace settings"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "If one Eventstream destination works but another does not, the issue is specific to the failing destination's configuration. For the Eventhouse destination, check: the Eventhouse/KQL database and table name, the authentication credentials, the ingestion mapping, and whether the Eventhouse is running and reachable. Checking the lakehouse credentials wouldn't diagnose an Eventhouse-specific issue."
+  },
+  {
+    "domain": "D3",
+    "q": "You need to optimize the refresh performance of a Fabric semantic model that takes 90 minutes to refresh. The model imports from a Fabric lakehouse. Which optimization technique is most effective?",
+    "options": [
+      "Enable Direct Lake mode instead of Import mode so the semantic model reads directly from OneLake without importing",
+      "Increase the number of report pages in the Power BI report",
+      "Add more columns to the semantic model",
+      "Change the workspace license mode"
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "Switching from Import mode to Direct Lake mode eliminates the data import step entirely \u2014 Direct Lake reads data directly from OneLake Delta files, bypassing the 90-minute import process. This dramatically reduces 'refresh' time (which in Direct Lake only needs to update metadata, not re-import all data). Adding columns or changing the license mode doesn't reduce import time."
+  },
+  {
+    "domain": "D3",
+    "q": "You need to monitor the data ingestion latency of a Fabric Eventstream pipeline and alert the team if the average latency exceeds 30 seconds. Which approach should you use?",
+    "options": [
+      "Create a Power BI report showing Eventstream statistics and review manually each day",
+      "Configure a Fabric alert on the Eventstream monitoring metrics with a threshold condition for latency exceeding 30 seconds",
+      "Check the Eventstream configuration settings weekly",
+      "Use the Fabric Git diff to track changes in the Eventstream"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Fabric provides alerting capabilities on monitoring metrics for various items including Eventstreams. Configuring an alert with a threshold on ingestion latency (>30 seconds) automatically notifies the team when the condition is met, without requiring manual checks. Daily manual review would miss transient spikes; Git diff tracks code changes, not runtime metrics."
+  },
+  {
+    "domain": "D3",
+    "q": "You need to identify which Fabric workspace items are consuming the most CU (Capacity Unit) compute in a shared Fabric capacity. Which tool provides per-item CU breakdown?",
+    "options": [
+      "Power BI Desktop",
+      "The Microsoft Fabric Capacity Metrics app \u2014 CU consumption by workspace and item type",
+      "Azure Monitor \u2014 diagnostic logs",
+      "The Fabric workspace admin settings"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "The Microsoft Fabric Capacity Metrics app provides a detailed breakdown of CU consumption by workspace, item type (Spark, pipelines, Eventhouses, lakehouses, etc.), and time period. This helps identify which items are consuming the most resources. Azure Monitor provides infrastructure metrics; Power BI Desktop is for report building; workspace admin settings show configuration, not CU consumption."
+  },
+  {
+    "domain": "D3",
+    "q": "You need to resolve a slow Spark query in a Fabric notebook. The query joins a large partitioned table (50 billion rows) with a small reference table (500 rows). The query is triggering a shuffle-based sort-merge join. What should you configure?",
+    "options": [
+      "Repartition both tables to 1 partition",
+      "Set spark.sql.autoBroadcastJoinThreshold to a value larger than the small reference table's size to trigger a broadcast join",
+      "Add more columns to the reference table",
+      "Convert the large table to CSV format"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Configuring spark.sql.autoBroadcastJoinThreshold to exceed the small reference table's size (e.g., '10mb' if the table is <10 MB) causes Spark to broadcast the small table to all executors, eliminating the expensive shuffle. A broadcast join is far faster than sort-merge for large-small table joins. Repartitioning both to 1 partition would create a severe bottleneck."
+  },
+  {
+    "domain": "D3",
+    "q": "A Fabric data pipeline is failing with the error 'Activity failed with UserError: DatastoreError \u2014 Destination lakehouse is not writable'. What is the most likely cause?",
+    "options": [
+      "The source system is offline",
+      "The identity running the pipeline does not have write permissions on the destination lakehouse, or the lakehouse is read-only",
+      "The pipeline has too many activities",
+      "The Fabric capacity is offline"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "'Destination not writable' or permission-related Datastore errors indicate that the pipeline's execution identity (usually the workspace identity or service principal) does not have write permission on the destination lakehouse. Checking and granting Contributor-level access or write permissions to the pipeline's identity resolves this. Source system offline gives a different error; pipeline complexity and capacity status don't affect write permissions."
+  },
+  {
+    "domain": "D3",
+    "type": "ordering",
+    "q": "Arrange the steps to resolve a Fabric notebook that is failing with an out-of-memory error when processing a large Delta table.",
+    "items": [
+      "Rerun the notebook to confirm the memory error is resolved",
+      "Identify the transformation step causing the spike in memory usage",
+      "Optimize the step: increase executor memory in session config, repartition the data, or process in batches",
+      "Review the Spark execution plan and memory usage in the Spark monitoring UI"
+    ],
+    "correctSequence": [
+      1,
+      3,
+      2,
+      0
+    ],
+    "explanation": "Resolving a memory error starts by identifying which transformation step causes the spike, then reviewing the Spark execution plan and memory usage in the monitoring UI to understand why, then optimizing the step (increasing memory, repartitioning, or batching), and finally rerunning to confirm the fix."
+  },
+  {
+    "domain": "D3",
+    "multi": true,
+    "q": "You need to maintain a Fabric lakehouse Delta table's health and performance over time. Which TWO maintenance operations should be scheduled regularly?",
+    "options": [
+      "Run OPTIMIZE to compact small files and ZORDER on frequently filtered columns",
+      "Run VACUUM to remove old files no longer referenced by the Delta transaction log",
+      "Run DELETE FROM the Delta table to keep the row count under control",
+      "Drop and recreate all Delta tables monthly to reset performance"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "OPTIMIZE compacts small files and optionally applies ZORDER for query performance \u2014 should run regularly after incremental loads. VACUUM removes orphaned files that accumulate from updates and deletes, reducing storage costs. DELETE to control row count is a business decision, not a maintenance operation; dropping tables monthly destroys data and Delta history."
+  },
+  {
+    "domain": "D3",
+    "type": "matching",
+    "q": "Match each Fabric monitoring scenario on the left to the most appropriate monitoring tool or action on the right.",
+    "left": [
+      "Monitor overall CU consumption across all workspace items",
+      "Diagnose a slow-running T-SQL query in the Fabric warehouse",
+      "Verify that Fabric mirroring is actively replicating from Azure SQL Database",
+      "Track who accessed a Fabric lakehouse in the past 30 days"
+    ],
+    "right": [
+      "Review Microsoft Fabric audit logs via Microsoft Purview",
+      "The Fabric Capacity Metrics app \u2014 CU by item type and workspace",
+      "The Fabric mirroring monitoring page \u2014 replication status and latency",
+      "Warehouse query monitoring \u2014 review execution plan and statistics"
+    ],
+    "correctMap": [
+      1,
+      3,
+      2,
+      0
+    ],
+    "explanation": "CU consumption monitoring \u2192 Capacity Metrics app. Slow T-SQL query diagnosis \u2192 warehouse query monitoring and execution plan. Mirroring replication status \u2192 mirroring monitoring page. Lakehouse access audit \u2192 Microsoft Fabric audit logs in Purview."
+  },
+  {
+    "domain": "D1",
+    "q": "You need to share a Fabric lakehouse output with a business stakeholder who only needs to view data. The stakeholder should not have access to the pipeline or other workspace items. What should you do?",
+    "options": [
+      "Add the stakeholder as a Contributor in the workspace",
+      "Share only the lakehouse with the stakeholder and grant SQL endpoint read access",
+      "Add the stakeholder as an Admin in the workspace",
+      "Give the stakeholder the pipeline URL"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Item-level sharing lets you grant a user access to a specific item without workspace-level access. Sharing the lakehouse with SQL endpoint read access gives the stakeholder data access without exposing the pipeline or other items. Workspace Contributor/Admin roles grant access to all items."
+  },
+  {
+    "domain": "D1",
+    "q": "After updating a notebook in a Fabric Development workspace, you need to promote it to Production. What is the correct sequence?",
+    "options": [
+      "Deploy directly from Development to Production, skipping Test",
+      "Deploy from Development to Test first, validate, then deploy from Test to Production",
+      "Deploy from Production to Development",
+      "Deploy to all stages simultaneously"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Deployment pipelines follow a sequential flow: Development to Test to Production. Promoting to Test first allows validation before reaching Production. Skipping stages bypasses testing gates; deploying in reverse or simultaneously is not a best practice."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to retrieve a Fabric lakehouse Delta table as it existed exactly 7 days ago. Which Delta Lake capability enables this?",
+    "options": [
+      "VACUUM with 7-day retention",
+      "Delta time travel: SELECT * FROM table TIMESTAMP AS OF <timestamp>",
+      "OPTIMIZE and then restore",
+      "ZORDER BY to retrieve historical data"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Delta Lake time travel allows querying a table at a historical point in time using TIMESTAMP AS OF or VERSION AS OF syntax. VACUUM removes old files needed for time travel; OPTIMIZE compacts files; ZORDER is a data layout optimization."
+  },
+  {
+    "domain": "D2",
+    "q": "You are implementing a Copy Data activity in a Fabric pipeline to load 1 billion rows from an Azure SQL Database. You need to maximize throughput. Which setting should you configure?",
+    "options": [
+      "Set the degree of copy parallelism to 1",
+      "Enable parallel copy by setting a degree of copy parallelism greater than 1 in the source settings",
+      "Disable the gateway",
+      "Switch the sink to CSV format"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "Parallel copy splits the data read into multiple concurrent threads, increasing throughput for large tables. Setting parallelism to 1 forces sequential single-threaded reads. Gateway status and sink format do not directly affect read throughput."
+  },
+  {
+    "domain": "D2",
+    "q": "You need to write a PySpark notebook that reads a Delta table, filters for Status = Active, and writes the result to a new Delta table. Which code pattern is correct?",
+    "options": [
+      "spark.read.delta(path).filter(Status='Active').write.delta(target)",
+      "df = spark.read.format('delta').load(path); df_filtered = df.filter(df.Status == 'Active'); df_filtered.write.format('delta').save(target)",
+      "spark.sql('COPY INTO target SELECT * FROM source WHERE Status = Active')",
+      "df.select('Status').write.csv(path)"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "The correct PySpark pattern: read with spark.read.format('delta').load(), filter with df.filter(df.Status == 'Active'), and write with df.write.format('delta').save(). COPY INTO is T-SQL; the first option has incorrect Python filter syntax; select+write.csv is wrong data type and destination."
+  },
+  {
+    "domain": "D3",
+    "q": "You need to monitor the refresh status and history of a Fabric semantic model. Where should you look?",
+    "options": [
+      "Power BI Desktop file properties",
+      "The semantic model Settings page in Fabric \u2014 Refresh history tab",
+      "The Fabric workspace Git history",
+      "OneLake storage metrics"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "The semantic model Refresh history tab shows all scheduled and manual refresh runs, status (success/failure), duration, and error messages. This is the primary place for monitoring semantic model refresh health."
+  },
+  {
+    "domain": "D3",
+    "q": "A Fabric pipeline notebook activity fails with: AttributeError: NoneType object has no attribute filter. What is the most likely cause?",
+    "options": [
+      "The Fabric capacity was upgraded",
+      "The notebook is receiving None for a DataFrame variable where it expects a DataFrame \u2014 e.g. from a failed read or empty query result",
+      "The workspace was renamed",
+      "The pipeline trigger was changed"
+    ],
+    "answer": [
+      1
+    ],
+    "explanation": "AttributeError on NoneType means the code calls a method like .filter() on a variable that is None instead of a DataFrame. This occurs when a data read returns None or an empty result. Adding null checks or ensuring the source data exists resolves the error."
+  },
+  {
+    "domain": "D2",
+    "multi": true,
+    "q": "You need least-privilege access for data analysts on a Fabric lakehouse. Which TWO configurations are correct?",
+    "options": [
+      "Share the lakehouse and grant Read all SQL Endpoint data to allow Delta table querying via T-SQL",
+      "Do NOT grant Read all Apache Spark to prevent file-level access to the raw Files section",
+      "Add the DataAnalysts group to the Workspace Admin role",
+      "Grant Read all Apache Spark so analysts can read raw files directly"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Read all SQL Endpoint data grants SQL-level Delta table access only. Withholding Read all Apache Spark prevents direct file access to raw data. Workspace Admin grants full access; Read all Apache Spark grants file-level Spark access including raw files."
+  },
+  {
+    "domain": "D3",
+    "type": "ordering",
+    "q": "Arrange the steps to resolve a Fabric Dataflow Gen2 failing with a schema mismatch after a source column was renamed.",
+    "items": [
+      "Save and republish the Dataflow Gen2",
+      "Open the Dataflow Gen2 editor and navigate to the failing step",
+      "Update the column reference to the new name in the affected step",
+      "Trigger a test refresh to validate the fix"
+    ],
+    "correctSequence": [
+      1,
+      2,
+      0,
+      3
+    ],
+    "explanation": "Resolving schema mismatch: open the editor and navigate to the failing step, update the column reference to the new source name, save and republish, then trigger a test refresh to confirm the fix."
+  },
+  {
+    "domain": "D1",
+    "multi": true,
+    "q": "You need all Spark workloads in a Fabric workspace to use a consistent pre-configured Python environment. Which TWO steps should you perform?",
+    "options": [
+      "Create a Fabric custom environment with the required runtime version and Python libraries",
+      "In Spark workspace settings, set the default environment to the custom environment",
+      "Require engineers to install libraries manually per notebook session",
+      "Configure the runtime version in OneLake workspace settings"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Creating a Fabric custom environment and setting it as the Spark workspace default ensures all notebooks and Spark jobs automatically use the consistent environment. Per-session manual installs are inconsistent; OneLake settings control storage, not Spark runtime."
+  }
+]; // end questions array
+
+// ===================================================================
+// STATE
+// ===================================================================
+let currentQ = 0;
+let answers = {};          // { idx: [selected option indices] }
+let flagged = {};          // { idx: true/false }
+let submitted = false;
+let timerInterval = null;
+let timeLeft = 100 * 60;   // seconds
+let blurWarnings = 0;
+const MAX_BLUR = 3;
+let examActive = false;
+let results = null;
+
+// ===================================================================
+// START / RESET
+// ===================================================================
+function startExam() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('exam-screen').style.display = 'block';
+  examActive = true;
+  submitted = false;
+  currentQ = 0;
+  answers = {};
+  flagged = {};
+  blurWarnings = 0;
+  timeLeft = 100 * 60;
+  document.getElementById('hdr-total').textContent = questions.length;
+  buildNavGrid();
+  renderQuestion(0);
+  updateStats();
+  startTimer();
+  attachVisibilityListeners();
+  window.scrollTo(0, 0);
+}
+
+function resetExam() {
+  clearInterval(timerInterval);
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('review-screen').style.display = 'none';
+  document.getElementById('start-screen').style.display = 'flex';
+  examActive = false;
+  submitted = false;
+  removeVisibilityListeners();
+}
+
+// ===================================================================
+// TIMER
+// ===================================================================
+function startTimer() {
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      autoSubmit('Time is up! Your exam has been submitted automatically.');
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  const str = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const el = document.getElementById('hdr-timer');
+  el.textContent = str;
+  if (timeLeft <= 300) el.classList.add('warning');
+  else el.classList.remove('warning');
+}
+
+// ===================================================================
+// QUESTION TYPE HELPERS
+// ===================================================================
+function getQType(q) {
+  if (q.type === 'ordering') return 'ordering';
+  if (q.type === 'matching') return 'matching';
+  return q.multi === true ? 'multi' : 'single';
+}
+
+function isAnswered(idx) {
+  const q = questions[idx];
+  const qType = getQType(q);
+  const a = answers[idx];
+  if (qType === 'single' || qType === 'multi') return !!(a && a.length > 0);
+  if (qType === 'ordering') return !!(a && Object.keys(a).length === q.items.length);
+  if (qType === 'matching') return !!(a && Object.keys(a).length === q.left.length);
+  return false;
+}
+
+// ===================================================================
+// RENDER QUESTION
+// ===================================================================
+function renderQuestion(idx) {
+  currentQ = idx;
+  const q = questions[idx];
+  const qType = getQType(q);
+  const isMulti = qType === 'multi';
+  const isFlagged = flagged[idx] || false;
+
+  const typeTag = isMulti ? '<span class="multi-tag">Select 2</span>'
+                : qType === 'ordering' ? '<span class="multi-tag">Put in Order</span>'
+                : qType === 'matching' ? '<span class="multi-tag">Match Pairs</span>' : '';
+  const tagsHtml = `<span class="domain-tag">${DOMAINS[q.domain]}</span>${typeTag}`;
+  const flagClass = isFlagged ? 'flagged' : '';
+  const flagLabel = isFlagged ? '🚩 Flagged' : '⚑ Flag for Review';
+
+  let bodyHtml = '';
+  let noticeHtml = '';
+
+  if (qType === 'single' || qType === 'multi') {
+    const userAns = answers[idx] || [];
+    let optionsHtml = '';
+    q.options.forEach((opt, i) => {
+      const sel = userAns.includes(i) ? 'selected' : '';
+      const inputType = isMulti ? 'checkbox' : 'radio';
+      optionsHtml += `
+        <li class="option-item ${sel}" onclick="selectOption(${idx},${i})">
+          <div class="opt-letter">${String.fromCharCode(65+i)}</div>
+          <div class="opt-label">${opt}</div>
+          <input type="${inputType}" style="display:none" ${userAns.includes(i)?'checked':''}>
+        </li>`;
+    });
+    if (isMulti) noticeHtml = `<div class="multi-notice">⚠ This question requires exactly 2 correct answers. Select both.</div>`;
+    bodyHtml = `<ul class="options-list">${optionsHtml}</ul>`;
+  } else if (qType === 'ordering') {
+    const userAns = answers[idx] || {};
+    noticeHtml = `<div class="multi-notice">⚠ Assign each item its correct step number (1 = first).</div>`;
+    let rowsHtml = '';
+    q.items.forEach((item, i) => {
+      const chosen = userAns[i] !== undefined ? userAns[i] : '';
+      let optsHtml = `<option value="" disabled ${chosen===''?'selected':''}>Step #</option>`;
+      for (let p = 1; p <= q.items.length; p++) {
+        optsHtml += `<option value="${p}" ${String(chosen)===String(p)?'selected':''}>Step ${p}</option>`;
+      }
+      rowsHtml += `
+        <li class="order-row">
+          <select class="order-select" onchange="setOrderAnswer(${idx},${i},this.value)">${optsHtml}</select>
+          <div class="order-label">${item}</div>
+        </li>`;
+    });
+    bodyHtml = `<ul class="options-list">${rowsHtml}</ul>`;
+  } else if (qType === 'matching') {
+    const userAns = answers[idx] || {};
+    noticeHtml = `<div class="multi-notice">⚠ Select the matching item on the right for each item on the left.</div>`;
+    let rowsHtml = '';
+    q.left.forEach((leftItem, i) => {
+      const chosen = userAns[i] !== undefined ? userAns[i] : '';
+      let optsHtml = `<option value="" disabled ${chosen===''?'selected':''}>Select match…</option>`;
+      q.right.forEach((rightItem, j) => {
+        optsHtml += `<option value="${j}" ${String(chosen)===String(j)?'selected':''}>${rightItem}</option>`;
+      });
+      rowsHtml += `
+        <li class="match-row">
+          <div class="match-label" style="flex:1;">${leftItem}</div>
+          <span class="match-arrow">→</span>
+          <select class="match-select" onchange="setMatchAnswer(${idx},${i},this.value)">${optsHtml}</select>
+        </li>`;
+    });
+    bodyHtml = `<ul class="options-list">${rowsHtml}</ul>`;
+  }
+
+  const prevDisabled = idx === 0 ? 'disabled' : '';
+  const nextLabel = idx === questions.length-1 ? 'Review & Submit' : 'Next →';
+  const nextAction = idx === questions.length-1 ? 'trySubmit()' : `goToNext()`;
+
+  const html = `
+    <div class="question-card">
+      <div class="q-meta">
+        <span class="q-num-badge">Question ${idx+1} of ${questions.length}</span>
+        <div class="q-tags">${tagsHtml}</div>
+      </div>
+      <div class="question-text">${q.q}</div>
+      ${noticeHtml}
+      ${bodyHtml}
+      <div class="explanation-box" id="exp-box"></div>
+      <div class="q-nav-btns">
+        <button class="btn-flag ${flagClass}" onclick="toggleFlag(${idx})">${flagLabel}</button>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-nav prev" onclick="goToPrev()" ${prevDisabled}>← Prev</button>
+          <button class="btn-nav" onclick="${nextAction}">${nextLabel}</button>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('exam-main').innerHTML = html;
+  updateNavGrid();
+  updateStats();
+  updateHeaderCounts();
+  document.getElementById('mob-qnum').textContent = idx+1;
+  document.getElementById('mob-qtotal').textContent = questions.length;
+  document.getElementById('mob-prev').disabled = idx === 0;
+  document.getElementById('mob-next').disabled = idx === questions.length-1;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===================================================================
+// ORDERING / MATCHING SELECT HANDLERS
+// ===================================================================
+function setOrderAnswer(qIdx, itemIdx, value) {
+  if (submitted) return;
+  if (!answers[qIdx]) answers[qIdx] = {};
+  if (value === '') delete answers[qIdx][itemIdx];
+  else answers[qIdx][itemIdx] = parseInt(value, 10);
+  updateNavGrid();
+  updateStats();
+  updateHeaderCounts();
+}
+
+function setMatchAnswer(qIdx, leftIdx, value) {
+  if (submitted) return;
+  if (!answers[qIdx]) answers[qIdx] = {};
+  if (value === '') delete answers[qIdx][leftIdx];
+  else answers[qIdx][leftIdx] = parseInt(value, 10);
+  updateNavGrid();
+  updateStats();
+  updateHeaderCounts();
+}
+
+// ===================================================================
+// OPTION SELECT
+// ===================================================================
+function selectOption(qIdx, optIdx) {
+  if (submitted) return;
+  const q = questions[qIdx];
+  const isMulti = q.multi === true;
+  if (!answers[qIdx]) answers[qIdx] = [];
+
+  if (isMulti) {
+    const pos = answers[qIdx].indexOf(optIdx);
+    if (pos > -1) {
+      answers[qIdx].splice(pos, 1);
+    } else {
+      if (answers[qIdx].length < 2) {
+        answers[qIdx].push(optIdx);
+      }
+      // If already 2 selected, swap the oldest (first)
+      else {
+        answers[qIdx].shift();
+        answers[qIdx].push(optIdx);
+      }
+    }
+  } else {
+    answers[qIdx] = [optIdx];
+  }
+
+  // Update visual
+  const opts = document.querySelectorAll('.option-item');
+  opts.forEach((el, i) => {
+    if (answers[qIdx].includes(i)) el.classList.add('selected');
+    else el.classList.remove('selected');
+    // Update letter bg via class
+    const letter = el.querySelector('.opt-letter');
+    if (answers[qIdx].includes(i)) letter.style.background = 'var(--navy)';
+    else letter.style.background = '';
+    if (answers[qIdx].includes(i)) letter.style.color = '#fff';
+    else letter.style.color = '';
+  });
+
+  updateNavGrid();
+  updateStats();
+  updateHeaderCounts();
+}
+
+// ===================================================================
+// NAVIGATION
+// ===================================================================
+function goToNext() {
+  if (currentQ < questions.length - 1) renderQuestion(currentQ + 1);
+}
+function goToPrev() {
+  if (currentQ > 0) renderQuestion(currentQ - 1);
+}
+function jumpTo(idx) {
+  renderQuestion(idx);
+}
+
+// ===================================================================
+// FLAG
+// ===================================================================
+function toggleFlag(idx) {
+  flagged[idx] = !flagged[idx];
+  const btn = document.querySelector('.btn-flag');
+  if (btn) {
+    btn.classList.toggle('flagged', flagged[idx]);
+    btn.textContent = flagged[idx] ? '🚩 Flagged' : '⚑ Flag for Review';
+  }
+  updateNavGrid();
+  updateStats();
+  updateHeaderCounts();
+}
+
+// ===================================================================
+// NAVIGATOR GRID
+// ===================================================================
+function buildNavGrid() {
+  const grid = document.getElementById('nav-grid');
+  grid.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn';
+    btn.id = `nav-${i}`;
+    btn.textContent = i + 1;
+    btn.onclick = () => jumpTo(i);
+    grid.appendChild(btn);
+  });
+}
+
+function updateNavGrid() {
+  questions.forEach((_, i) => {
+    const btn = document.getElementById(`nav-${i}`);
+    if (!btn) return;
+    btn.className = 'nav-btn';
+    if (i === currentQ) btn.classList.add('current');
+    else if (isAnswered(i)) btn.classList.add('answered');
+    if (flagged[i]) btn.classList.add('flagged-q');
+  });
+}
+
+// ===================================================================
+// STATS
+// ===================================================================
+function updateStats() {
+  const answered = questions.reduce((acc, _, i) => acc + (isAnswered(i) ? 1 : 0), 0);
+  const totalFlagged = Object.values(flagged).filter(Boolean).length;
+  document.getElementById('sb-answered').textContent = `${answered} / ${questions.length}`;
+  document.getElementById('sb-unanswered').textContent = questions.length - answered;
+  document.getElementById('sb-flagged').textContent = totalFlagged;
+  const pct = (answered / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function updateHeaderCounts() {
+  const answered = questions.reduce((acc, _, i) => acc + (isAnswered(i) ? 1 : 0), 0);
+  const totalFlagged = Object.values(flagged).filter(Boolean).length;
+  document.getElementById('hdr-answered').textContent = answered;
+  document.getElementById('hdr-flagged').textContent = totalFlagged;
+}
+
+// ===================================================================
+// SUBMIT FLOW
+// ===================================================================
+function trySubmit() {
+  if (submitted) return;
+  const unanswered = [];
+  questions.forEach((_, i) => {
+    if (!isAnswered(i)) unanswered.push(i+1);
+  });
+  const totalFlagged = Object.values(flagged).filter(Boolean).length;
+
+  let bodyHtml = '';
+  if (unanswered.length > 0) {
+    bodyHtml += `<div class="unanswered-list">⚠ You have <strong>${unanswered.length}</strong> unanswered question(s). These will be marked incorrect.</div>`;
+  }
+  if (totalFlagged > 0) {
+    bodyHtml += `<div class="unanswered-list" style="background:#EFF6FF;border-color:#BFDBFE;color:#1D4ED8;">📌 You have <strong>${totalFlagged}</strong> flagged question(s) you may want to review.</div>`;
+  }
+  bodyHtml += `Are you sure you want to submit? <strong>This cannot be undone.</strong>`;
+  document.getElementById('modal-body').innerHTML = bodyHtml;
+  document.getElementById('confirm-modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('confirm-modal').classList.remove('show');
+}
+
+function confirmSubmit() {
+  closeModal();
+  doSubmit();
+}
+
+function autoSubmit(msg) {
+  submitted = true;
+  examActive = false;
+  removeVisibilityListeners();
+  doSubmit(true);
+}
+
+// ===================================================================
+// PER-QUESTION EVALUATION (type-aware)
+// ===================================================================
+function evalQuestion(q, idx) {
+  const qType = getQType(q);
+  const a = answers[idx];
+
+  if (qType === 'single' || qType === 'multi') {
+    const userAns = (a || []).slice().sort((x,y)=>x-y);
+    const correctAns = q.answer.slice().sort((x,y)=>x-y);
+    const isCorrect = userAns.length === correctAns.length && userAns.every((v,i)=>v===correctAns[i]);
+    return { isCorrect, userAns, correctAns };
+  }
+
+  if (qType === 'ordering') {
+    const ua = a || {};
+    const entries = q.items.map((_, i) => ({ i, pos: ua[i] }));
+    const allFilled = entries.every(e => e.pos !== undefined);
+    let isCorrect = false;
+    if (allFilled) {
+      const userSeq = entries.slice().sort((x,y)=>x.pos-y.pos).map(e=>e.i);
+      isCorrect = userSeq.length === q.correctSequence.length && userSeq.every((v,i)=>v===q.correctSequence[i]);
+    }
+    return { isCorrect, userAns: ua, correctAns: q.correctSequence };
+  }
+
+  if (qType === 'matching') {
+    const ua = a || {};
+    const isCorrect = q.left.every((_, i) => ua[i] === q.correctMap[i]);
+    return { isCorrect, userAns: ua, correctAns: q.correctMap };
+  }
+
+  return { isCorrect: false, userAns: a, correctAns: null };
+}
+
+function doSubmit(auto) {
+  if (submitted && !auto) return;
+  submitted = true;
+  examActive = false;
+  clearInterval(timerInterval);
+  removeVisibilityListeners();
+
+  let correct = 0;
+  const domainStats = {};
+  Object.keys(DOMAINS).forEach(d => domainStats[d] = { correct:0, total:0 });
+  const qResults = [];
+
+  questions.forEach((q, idx) => {
+    const evalRes = evalQuestion(q, idx);
+    if (evalRes.isCorrect) correct++;
+    domainStats[q.domain].total++;
+    if (evalRes.isCorrect) domainStats[q.domain].correct++;
+    qResults.push({ idx, isCorrect: evalRes.isCorrect, userAns: evalRes.userAns, correctAns: evalRes.correctAns });
+  });
+
+  const pct = Math.round((correct / questions.length) * 100);
+  const scaled = Math.round(100 + (correct / questions.length) * 900);
+  const passed = scaled >= 700;
+
+  results = { correct, total: questions.length, pct, scaled, passed, domainStats, qResults };
+  showResults(results);
+}
+
+// ===================================================================
+// RESULTS
+// ===================================================================
+function showResults(r) {
+  document.getElementById('exam-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  window.scrollTo(0, 0);
+
+  const badge = document.getElementById('result-badge');
+  badge.innerHTML = r.passed ? '✓ PASSED' : '✗ NOT PASSED';
+  badge.className = `result-pass-badge ${r.passed ? 'badge-pass' : 'badge-fail'}`;
+
+  const pctEl = document.getElementById('result-pct');
+  pctEl.textContent = r.pct + '%';
+  pctEl.className = `result-pct ${r.passed ? 'pct-pass' : 'pct-fail'}`;
+
+  document.getElementById('result-scaled').innerHTML = `Scaled Score: <span>${r.scaled} / 1000</span> &nbsp;&middot;&nbsp; Pass: 700`;
+  document.getElementById('result-correct').innerHTML = `<strong>${r.correct}</strong> correct &nbsp;&middot;&nbsp; <strong>${r.total - r.correct}</strong> incorrect &nbsp;&middot;&nbsp; ${r.total} total`;
+
+  const container = document.getElementById('domain-breakdown-rows');
+  container.innerHTML = '';
+  Object.keys(DOMAINS).forEach(d => {
+    const s = r.domainStats[d];
+    const dp = s.total > 0 ? Math.round((s.correct/s.total)*100) : 0;
+    const cls = dp >= 70 ? 'dr-good' : dp >= 50 ? 'dr-mid' : 'dr-bad';
+    container.innerHTML += `
+      <div class="domain-row-r">
+        <div class="dr-name">${DOMAINS[d]}</div>
+        <div class="dr-score">${s.correct} / ${s.total}</div>
+        <div class="dr-pct ${cls}">${dp}%</div>
+      </div>`;
+  });
+}
+
+// ===================================================================
+// REVIEW MODE
+// ===================================================================
+function showReview() {
+  if (!results) return;
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('review-screen').style.display = 'block';
+  window.scrollTo(0, 0);
+
+  const wrapper = document.getElementById('review-wrapper');
+  wrapper.innerHTML = '<div style="padding-top: 24px;"></div>';
+
+  results.qResults.forEach(({ idx, isCorrect, userAns, correctAns }) => {
+    const q = questions[idx];
+    const qType = getQType(q);
+    const cardClass = isCorrect ? 'rq-correct' : 'rq-wrong';
+    const tagClass  = isCorrect ? 'rq-correct-tag' : 'rq-wrong-tag';
+    const tagLabel  = isCorrect ? '✓ Correct' : '✗ Incorrect';
+    const typeTag = qType === 'multi' ? '<span class="multi-tag">Select 2</span>'
+                  : qType === 'ordering' ? '<span class="multi-tag">Put in Order</span>'
+                  : qType === 'matching' ? '<span class="multi-tag">Match Pairs</span>' : '';
+
+    let bodyHtml = '';
+    let answerSummary = '';
+
+    if (qType === 'single' || qType === 'multi') {
+      let optHtml = '';
+      q.options.forEach((opt, i) => {
+        let cls = '';
+        if (correctAns.includes(i)) cls = 'correct-ans';
+        else if (userAns.includes(i)) cls = 'wrong-ans';
+        const icon = correctAns.includes(i) ? '✓' : (userAns.includes(i) ? '✗' : '');
+        optHtml += `
+          <li class="option-item no-select ${cls}">
+            <div class="opt-letter">${String.fromCharCode(65+i)}</div>
+            <div class="opt-label">${opt}</div>
+            ${icon ? `<div class="opt-icon">${icon}</div>` : ''}
+          </li>`;
+      });
+      bodyHtml = `<ul class="options-list">${optHtml}</ul>`;
+      answerSummary = `Correct Answer${correctAns.length>1?'s':''}: ${correctAns.map(i=>String.fromCharCode(65+i)).join(', ')}`;
+    } else if (qType === 'ordering') {
+      let rowsHtml = '';
+      q.correctSequence.forEach((itemIdx, correctPos) => {
+        const userPos = userAns[itemIdx];
+        const gotRight = userPos === (correctPos+1);
+        const cls = gotRight ? 'correct-ans' : 'wrong-ans';
+        rowsHtml += `
+          <li class="order-row no-select ${cls}">
+            <div class="opt-letter">${correctPos+1}</div>
+            <div class="order-label">${q.items[itemIdx]}</div>
+            <div class="opt-icon">${gotRight ? '✓' : (userPos ? `Your #${userPos}` : '—')}</div>
+          </li>`;
+      });
+      bodyHtml = `<ul class="options-list">${rowsHtml}</ul>`;
+      answerSummary = `Correct order: ${q.correctSequence.map(i=>q.items[i]).join(' → ')}`;
+    } else if (qType === 'matching') {
+      let rowsHtml = '';
+      q.left.forEach((leftItem, i) => {
+        const correctRightIdx = q.correctMap[i];
+        const userRightIdx = userAns[i];
+        const gotRight = userRightIdx === correctRightIdx;
+        const cls = gotRight ? 'correct-ans' : 'wrong-ans';
+        rowsHtml += `
+          <li class="match-row no-select ${cls}">
+            <div class="match-label" style="flex:1;">${leftItem}</div>
+            <span class="match-arrow">→</span>
+            <div class="opt-label" style="flex:1;">${q.right[correctRightIdx]}</div>
+            <div class="opt-icon">${gotRight ? '✓' : '✗'}</div>
+          </li>`;
+      });
+      bodyHtml = `<ul class="options-list">${rowsHtml}</ul>`;
+      answerSummary = `Each item matched to its correct pair above.`;
+    }
+
+    wrapper.innerHTML += `
+      <div class="review-q-card ${cardClass}">
+        <div class="rq-header">
+          <span class="q-num-badge">Q${idx+1}</span>
+          <span class="domain-tag">${DOMAINS[q.domain]}</span>
+          ${typeTag}
+          <span class="rq-result-tag ${tagClass}">${tagLabel}</span>
+        </div>
+        <div class="question-text" style="border-bottom:none;padding-bottom:0;margin-bottom:16px;">${q.q}</div>
+        ${bodyHtml}
+        <div class="explanation-box show">
+          <div class="exp-header">${answerSummary}</div>
+          <div class="exp-text">${q.explanation}</div>
+        </div>
+      </div>`;
+  });
+}
+function backToResults() {
+  document.getElementById('review-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+// ===================================================================
+// TAB VISIBILITY DETECTION
+// ===================================================================
+function handleVisibilityChange() {
+  if (!examActive || submitted) return;
+  if (document.visibilityState === 'hidden' || document.hidden) {
+    blurWarnings++;
+    const remaining = MAX_BLUR - blurWarnings;
+    const blurMsg = document.getElementById('blur-count-msg');
+    if (remaining > 0) {
+      blurMsg.textContent = `Warning ${blurWarnings} of ${MAX_BLUR}. ${remaining} more warning(s) and your exam will be auto-submitted.`;
+    } else {
+      blurMsg.textContent = `Maximum warnings reached. Your exam is being submitted now.`;
+    }
+    document.getElementById('blur-overlay').classList.add('show');
+    if (blurWarnings >= MAX_BLUR) {
+      setTimeout(() => {
+        document.getElementById('blur-overlay').classList.remove('show');
+        autoSubmit('Too many tab switches. Exam submitted automatically.');
+      }, 2500);
+    }
+  }
+}
+
+function handleWindowBlur() {
+  // Additional catch for window-level focus loss
+  if (!examActive || submitted) return;
+  // We rely on visibilitychange mostly; this is a backup
+}
+
+function attachVisibilityListeners() {
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  window.addEventListener('blur', handleWindowBlur);
+}
+
+function removeVisibilityListeners() {
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
+  window.removeEventListener('blur', handleWindowBlur);
+}
+
+function returnToExam() {
+  if (submitted) return;
+  document.getElementById('blur-overlay').classList.remove('show');
+}
+
+// ===================================================================
+// PREVENT RIGHT-CLICK & COPY
+// ===================================================================
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  // Prevent F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
+  if (e.key === 'F12') e.preventDefault();
+  if (e.ctrlKey && e.shiftKey && (e.key==='I'||e.key==='i'||e.key==='J'||e.key==='j'||e.key==='C'||e.key==='c')) e.preventDefault();
+  if (e.ctrlKey && (e.key==='u'||e.key==='U'||e.key==='s'||e.key==='S')) e.preventDefault();
+});
+</script>
+</body>
+</html>
